@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Clases;
 
 namespace WpfApp1
 {
@@ -25,5 +26,9 @@ namespace WpfApp1
             InitializeComponent();
         }
 
+        private void cmiCuadrado_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

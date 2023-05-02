@@ -26,53 +26,115 @@
 
         <ComboBox 
             x:Name="cbSeleccionarFigura" 
-            Width="100" 
+            Width="200" 
             HorizontalAlignment="Center" 
             VerticalAlignment="Center"
             Grid.Column="0"
             Grid.Row="0" 
             >
             <ComboBoxItem
-                x:Name="cmiTriangulo"
-                Content="Triángulo"
-                
-                >
-            </ComboBoxItem>
+                x:Name="cmiCuadrado"
+                Content="Cuadrado" 
+                Selected="cmiCuadrado_Selected"
+                />
+
         </ComboBox>
         <Grid
             Grid.Column="1"
             Grid.Row="1"
             >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="0.5*"
-                    />
-                <ColumnDefinition
-                    Width="0.5"
-                    />
+                <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="0.4*"
+                    />
+                <RowDefinition
+                    Height="0.4*"
+                    />
+                <RowDefinition
+                    Height="0.2*"
+                    
+                    />
+            </Grid.RowDefinitions>
             <TextBlock
-            x:Name="tbArea"
-            Width="100"
-            TextAlignment="Center"
-            VerticalAlignment="Bottom"
-            HorizontalAlignment="Center" 
-            Margin="0,20,0,0"
-                >
-            Perímetro
-            </TextBlock>
+                x:Name="tbArea"
+                Grid.Column="0"
+                Grid.Row="0"
+                Width="100"
+                Height="20"
+                Background="AliceBlue"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Margin="40"
+                Text="Área"/>
             <TextBlock
-            x:Name="tbPerimetro"
-            Width="100"
-            TextAlignment="Center"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center" 
-            
-            >
-            Area
-            </TextBlock>
+                x:Name="tbPerimetro"
+                Grid.Column="0"
+                Grid.Row="1"
+                Width="100"    
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Background="AliceBlue"
+                Margin="40"
+                Text="Perímetro"/>
+            <TextBlock
+                x:Name="tbMostrarArea"
+                Grid.Column="1"
+                Grid.Row="0"
+                Background="LightGray"
+                Height="20"
+                Width="100"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Text=""/>
+            <TextBlock
+                x:Name="tbMostrarPerimetro"
+                Grid.Column="1"
+                Grid.Row="1"
+                Background="LightGray"
+                Height="20"
+                Width="100"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Text=""/>
+            <Button
+                x:Name="btnCalcular"
+                Grid.ColumnSpan="2"
+                Grid.Row="2"
+                Height="20"
+                Width="100"
+                Content="Calcular"
+                />
         </Grid>
-     
-
+        <Grid
+            Grid.Row="0"
+            Grid.Column="1"
+            >
+            <!-- Estos estan hidden segun la selección-->
+            <!-- Crear dos etiquetas estandar y segun
+            la seleccion que cambie el content
+            -->
+            <Label x:Name="lblLado"
+                   Grid.Column="1"
+                   Grid.Row="0"
+                   Width="100"
+                   Height="30"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Margin="40"
+                   Content="Aqui me quedé"
+                   Background="LightSkyBlue" 
+                   Visibility="Visible"
+                   />
+            <TextBox x:Name="Altura"
+                Visibility="Hidden"
+                 
+                 />
+        </Grid>
     </Grid>
 </Window>
+
+
