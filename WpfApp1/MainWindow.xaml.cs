@@ -24,10 +24,20 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
         private void cmiCuadrado_Selected(object sender, RoutedEventArgs e)
         {
+
+
+
+        }
+
+        private void cbSeleccionarFigura_Initialized(object sender, EventArgs e)
+        {
+            
+
 
         }
     }
