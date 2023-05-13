@@ -28,34 +28,27 @@ namespace WpfApp1
         {
             InitializeComponent();
         }
-
-        //private DoubleAnimation Parpadeo()
-        //{
-        //    Storyboard x = new();
-
-        //    DoubleAnimation _animacionParpadeo = new();
-        //    _animacionParpadeo.From = 1;
-        //    _animacionParpadeo.To = 0;
-        //    x.Clone(cb);
-
-        //}
-
-        private Image CambiarImagen(string direccion, Image imagen)
+        private Image CambiarImagen(Uri myUri, Image imagen)
         {
             BitmapImage myBitmap = new BitmapImage();
-            if (!string.IsNullOrEmpty(direccion))
-            {
-                try
-                {
-                    Uri myUri = new Uri(direccion);
+
                     myBitmap.BeginInit();
                     myBitmap.UriSource = myUri;
                     myBitmap.EndInit();
-                }
-                catch (System.UriFormatException) { }
-            }
+
             imagen.Source = myBitmap;
             return imagen;
+        }
+        private void DesabilitarTodo()
+        {
+            TextBox1.Visibility = Visibility.Hidden;
+            TextBox2.Visibility = Visibility.Hidden;
+            TextBox1.Visibility = Visibility.Hidden;
+            TextBox2.Visibility = Visibility.Hidden;
+            imgArea.Visibility = Visibility.Hidden;
+            imgPerimetro.Visibility = Visibility.Hidden;
+            txtArea.Text = "";
+            txtPerimetro.Text = "";
         }
         private void HabilitarTextBox(int cantidadTB) 
         {
@@ -69,13 +62,8 @@ namespace WpfApp1
                 TextBox2.Visibility = Visibility.Visible;
                 TextBox2.IsEnabled = true;
             }
-            if (cantidadTB >= 3) 
-            {
-                TextBox2.Visibility = Visibility.Visible;
-                TextBox2.IsEnabled = true;
-            }
+            btnCalcular.Visibility = Visibility.Visible;
         }
-
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             // @"^[0-9](\d*\.?(\d{9})?){1}$"
@@ -84,28 +72,21 @@ namespace WpfApp1
         }
         private void cbSeleccionarFigura_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
+            DesabilitarTodo();
+
             if (cbSeleccionarFigura.SelectedItem == cmiCuadrado)
             {
-                CambiarImagen("C:\\Users\\CESARLEPEGARCIA\\source\\repos\\CesarLepeITT\\Practica1\\WpfApp1\\Imagenes\\Cuadrado.png", MyImagen);
+                // No pude hacerla una uri relativa, sad 
+                //C:\Users\CESARLEPEGARCIA\Source\Repos\CesarLepeITT\Practica1\WpfApp1\Imagenes\
+                // C:\Users\CESARLEPEGARCIA\Source\Repos\CesarLepeITT\Practica1\WpfApp1\Imagenes\Cuadrado.png
+                CambiarImagen(new Uri (@"C:\Users\CESARLEPEGARCIA\Source\Repos\CesarLepeITT\Practica1\WpfApp1\Imagenes\Cuadrado.png"), MyImagen);
                 HabilitarTextBox(1);
             }
             else if (cbSeleccionarFigura.SelectedItem == cmiRectangulo)
             {
-                CambiarImagen("C:\\Users\\CESARLEPEGARCIA\\source\\repos\\CesarLepeITT\\Practica1\\WpfApp1\\Imagenes\\Rectángulo.png", MyImagen);
+                CambiarImagen(new Uri("C:\\Users\\CESARLEPEGARCIA\\source\\repos\\CesarLepeITT\\Practica1\\WpfApp1\\Imagenes\\Rectángulo.png"), MyImagen);
                 HabilitarTextBox(2);
-            }
-        }
-
-        private void TextBox2_TextInput(object sender, TextCompositionEventArgs e)
-        {
-            double lado1;
-            try
-            {
-                lado1 = double.Parse(TextBox2.Text);
-            }
-            catch (FormatException)
-            {
-                lado1 = 1;
             }
         }
         private void btnCalcular_Click(object sender, RoutedEventArgs e)
@@ -114,23 +95,40 @@ namespace WpfApp1
             double lado2;
             if (cbSeleccionarFigura.SelectedItem == cmiCuadrado)
             {
-                lado1 = double.Parse(TextBox1.Text);
+                try
+                { lado1 = double.Parse(TextBox1.Text); }
+                catch (FormatException) { lado1 = 1; }
                 Cuadrado myCuadrado = new Cuadrado(lado1);
                 txtArea.Text = myCuadrado.Area.ToString();
                 txtPerimetro.Text = myCuadrado.Perimetro.ToString();
-                CambiarImagen("C:\\Users\\CESARLEPEGARCIA\\source\\repos\\CesarLepeITT\\Practica1\\WpfApp1\\Imagenes\\Rectángulo Area.png", imgArea);
-                CambiarImagen("C:\\Users\\CESARLEPEGARCIA\\source\\repos\\CesarLepeITT\\Practica1\\WpfApp1\\Imagenes\\Cuadrado Perimetro.png", imgPerimetro);
-            }
+                CambiarImagen(new Uri (@"C:\Users\CESARLEPEGARCIA\Source\Repos\CesarLepeITT\Practica1\WpfApp1\Imagenes\Cuadrado Area.png"), imgArea);
+                CambiarImagen(new Uri("C:\\Users\\CESARLEPEGARCIA\\source\\repos\\CesarLepeITT\\Practica1\\WpfApp1\\Imagenes\\Cuadrado Perimetro.png"), imgPerimetro);
+
+                }
             if (cbSeleccionarFigura.SelectedItem == cmiRectangulo)
             {
-                lado1 = double.Parse(TextBox1.Text);
-                lado2 = double.Parse(TextBox2.Text);
+                try
+                {
+                    lado1 = double.Parse(TextBox1.Text);
+                    lado2 = double.Parse(TextBox2.Text);
+                }
+                catch (FormatException)
+                {
+                    lado1 = 1;
+                    lado2 = 1;
+                }
                 Rectangulo myRectangulo = new Rectangulo(lado1 , lado2);
                 txtArea.Text = myRectangulo.Area.ToString();
-                CambiarImagen("C:\\Users\\CESARLEPEGARCIA\\source\\repos\\CesarLepeITT\\Practica1\\WpfApp1\\Imagenes\\Rectángulo Area.png", imgArea);
+                CambiarImagen(new Uri(@"C:\Users\CESARLEPEGARCIA\source\repos\CesarLepeITT\Practica1\WpfApp1\Imagenes\Rectángulo Area.png"), imgArea);
                 txtPerimetro.Text = myRectangulo.Perimetro.ToString();
-                CambiarImagen("C:\\Users\\CESARLEPEGARCIA\\source\\repos\\CesarLepeITT\\Practica1\\WpfApp1\\Imagenes\\Rectángulo Perimetro.png", imgPerimetro);
+                CambiarImagen(new Uri(@"C:\Users\CESARLEPEGARCIA\Source\Repos\CesarLepeITT\Practica1\WpfApp1\Imagenes\Rectángulo Perimetro.png"), imgPerimetro);
             }
+
+            txtArea.Visibility = Visibility.Visible;
+            txtPerimetro.Visibility = Visibility.Visible;
+            imgArea.Visibility = Visibility.Visible;
+            imgPerimetro.Visibility = Visibility.Visible;
+
         }
     }
 }

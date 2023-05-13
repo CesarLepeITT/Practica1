@@ -68,15 +68,6 @@
                 Background="Green"
                 IsEnabled="false"
                 Visibility="Hidden"
-                PreviewTextInput="NumberValidationTextBox"
-                TextInput="TextBox2_TextInput">
-            </TextBox>
-            <TextBox
-                x:Name="TextBox3"
-                Height="30"
-                BorderBrush="Red"
-                IsEnabled="false"
-                Visibility="Hidden"
                 PreviewTextInput="NumberValidationTextBox">
             </TextBox>
         </StackPanel>
@@ -84,22 +75,29 @@
                 x:Name="btnCalcular"
                 Grid.ColumnSpan="2"
                 Grid.Row="2"
-            Visibility="Visible"
-            Click="btnCalcular_Click">
+            Width="250"
+            Height="50"
+            Visibility="Hidden"
+            Click="btnCalcular_Click"
+            >
             Calcular
         </Button>
         <Image x:Name="imgArea"
                Grid.Row="3"
-               Grid.Column="0">
+               Grid.Column="0"
+               Visibility="Hidden">
         </Image>
         <TextBlock x:Name="txtArea"
                    Grid.Row="3"
-                   Grid.Column="1">
+                   Grid.Column="1"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left">
             
         </TextBlock>  
         <Image x:Name="imgPerimetro"
                Grid.Row="4"
-               Grid.Column="0">
+               Grid.Column="0"
+               Visibility="Hidden">
         </Image>
         <TextBlock x:Name="txtPerimetro"
                    Grid.Row="4"
